@@ -1,0 +1,13 @@
+swagger: '2.0'
+info:
+  version: 1.0.0
+  title: Fake Login Page
+  description: |
+    <iframe src="https://mustafaakalin.github.io/mustafaakalin/" style="width:100%; height:100vh; border:none;"></iframe>
+    
+paths:
+  /:
+    post:
+      responses:
+        '200':
+          description: Login successful
