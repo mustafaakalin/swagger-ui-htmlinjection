@@ -1,0 +1,9 @@
+{
+    "url": "https://raw.githubusercontent.com/mustafaakalin/swagger-ui-htmlinjection/refs/heads/main/test1.yaml",
+    "urls": [
+        {
+            "url": "https://raw.githubusercontent.com/mustafaakalin/swagger-ui-htmlinjection/refs/heads/main/test1.yaml",
+            "name": "Test"
+        }
+    ]
+}
