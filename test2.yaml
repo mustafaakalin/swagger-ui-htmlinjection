@@ -1,0 +1,83 @@
+swagger: '2.0'
+info:
+  version: 1.0.0
+  title: Bug Bounty Pentest API
+  description: '<div class="pentest-api">
+    <div class="heading">
+        <h1>Bug Bounty Pentest: API for Vulnerability Discovery</h1>
+    </div>
+    <div class="form-container">
+        <p>This API simulates various security vulnerabilities for testing:</p>
+        <ul>
+            <li>SQL Injection Testing</li>
+            <li>XSS Testing</li>
+            <li>Open Redirect Testing</li>
+        </ul>
+        <h3>XSS Testing</h3>
+        <form action="javascript:alert(\'XSS Test Executed\')" method="post">
+            <label for="comment">Leave a comment:</label>
+            <input type="text" id="comment" name="comment" size="20">
+            <button type="submit" class="btn btn-default">Submit</button>
+        </form>
+        <img src="invalid" onerror="alert(\'Image XSS Test\')">
+    </div>
+</div>'
+paths:
+  /api/v1/sql-injection:
+    post:
+      summary: SQL Injection Test Endpoint
+      description: |
+        This endpoint simulates a SQL injection vulnerability. Submit any data to test for SQLi.
+      parameters:
+        - name: user
+          in: body
+          description: Enter a SQL payload in the user field
+          required: true
+          schema:
+            type: object
+            properties:
+              username:
+                type: string
+                example: "' OR 1=1 --"
+              password:
+                type: string
+                example: "password123"
+      responses:
+        '200':
+          description: SQL injection tested successfully
+
+  /api/v1/xss:
+    post:
+      summary: XSS Test Endpoint
+      description: |
+        This endpoint simulates a cross-site scripting (XSS) vulnerability. Submit a comment containing JavaScript.
+      parameters:
+        - name: comment
+          in: body
+          description: Submit a comment
+          required: true
+          schema:
+            type: object
+            properties:
+              comment:
+                type: string
+                example: "<script>alert(\'XSS\')</script>"
+      responses:
+        '200':
+          description: XSS tested successfully
+
+  /api/v1/open-redirect:
+    get:
+      summary: Open Redirect Test Endpoint
+      description: |
+        This endpoint is vulnerable to open redirects. Submit a malicious URL to see if the redirect happens.
+      parameters:
+        - name: url
+          in: query
+          description: Enter a URL to redirect to
+          required: true
+          type: string
+          example: "https://evil.com"
+      responses:
+        '302':
+          description: Redirected to the submitted URL
